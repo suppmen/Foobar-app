@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+
+import { getData, getBeers } from "./Modules/rest";
+import React, {useState, useEffect} from "react";
 import './App.css';
+import OrderList from "./Components/OrderList";
 
 function App() {
+  const [data, setData] = useState({});
+  const [beers, setBeers] = useState({});
+
+  
+  
+  useEffect(() => {
+    getData(setData);
+   getBeers(setBeers);
+
+   setInterval(() => {
+     getData(setData);
+   }, 10000);
+      getData(setData);
+  }, []); 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <h1>Hello World</h1>
+     {data.bar && <OrderList data={data} />}
     </div>
   );
 }
